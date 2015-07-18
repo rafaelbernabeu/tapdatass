@@ -1,0 +1,31 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                                       Application.index
+GET     /addWin                                 Application.addWin
+GET     /addLose                                Application.addLose
+GET     /gallery                                Gallery.index
+GET     /upload                                 Upload.index
+GET     /tags/search                            Tags.search
+GET     /tags/list                              Tags.list
+GET     /tags/new                               Tags.edit
+
+POST    /tags/edit                              Tags.edit
+POST    /tags/delete                            Tags.delete
+POST    /photos/delete                          Photos.delete
+
+
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/                                staticDir:public
+GET     /assets/                                staticDir:app/views/syrena/assets
+GET     /tags/assets/                           staticDir:app/views/syrena/assets
+GET     /date/                                  staticDir:date/
+
+# Catch all
+*       /{controller}/{action}                  {controller}.{action}

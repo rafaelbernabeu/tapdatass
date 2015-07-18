@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,width=device-width,height=device-height,target-densitydpi=device-dpi,user-scalable=yes" />
+    <title>#{get 'title' /}</title>
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/app/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/app/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/app/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/app/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="assets/app/ico/favico.png">
+    <link rel="shortcut icon" href="assets/app/ico/favico.ico">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300italic,300,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/app/css/dependencies.css" rel="stylesheet" />
+    <link href="assets/app/css/syrena-admin.css" rel="stylesheet" />
+
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+
+    <style>
+        .controls > input,
+        .controls > select,
+        .controls > .row,
+        .controls > .input-group,
+        .controls > .form-group > .input-group{
+        margin-bottom: 15px;
+        }
+    </style>
+
+    #{get 'moreStyles' /}
+
+  </head>
+
+  <body>
+    <section id="wrapper" class="container">
+        <aside class="side-left">
+            <div class="side-header">
+                <h1 id="brand" class="brand" style="text-align: center;">
+                    <a href="@{Application.index}" style="text-transform: capitalize;">
+                        GO TAPDATASS!
+                    </a>
+                </h1><!-- /brand -->
+                <form id="smart-search" class="side-form hide" role="form">
+                    <input type="text" class="form-control" date-target=".side-wrapper" placeholder="Smart Finder">
+                </form><!-- /side wrapper -->
+            </div><!-- /side header -->
+            <div class="side-body">
+                <div class="side-wrapper side-wrapper-large">
+                    <div class="side-wrapper-status lead">No result, please start typing!</div>
+                    <div class="side-wrapper-result">
+                    </div><!-- /side-wrapper-result -->
+                </div><!-- /side wrapper -->
+                <nav class="side-nav">
+                    <ul>
+                        <li class="side-nav-item active">
+                            <a href="@{Application.index}">
+                                <i class="nav-item-icon icon ion-home"></i>
+                                Home
+                            </a>
+                        </li>
+                        <li class="side-nav-item">
+                            <a href="#gallery">
+                                <i class="nav-item-caret"></i>
+                                <i class="nav-item-icon icon glyphicon glyphicon-picture"></i>
+                                Gallery
+                            </a>
+                            <ul id="gallery" class="side-nav-child">
+                                <li class="side-nav-item-heading">
+                                    <a href="#" class="side-nav-back">
+                                        <i class="nav-item-caret"></i>
+                                        Gallery
+                                    </a>
+                                </li><!-- /header layouts child -->
+                                <li class="side-nav-item">
+                                    <a href="@{Gallery.index('newest')}">
+                                        <i class="nav-item-icon icon glyphicon glyphicon-time"></i>
+                                        Newest
+                                    </a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a href="@{Gallery.index('hottest')}">
+                                        <i class="nav-item-icon icon glyphicon glyphicon-fire"></i>
+                                        Hottest
+                                    </a>
+                                </li><!-- /blank -->
+                                <li class="side-nav-item">
+                                    <a href="@{Gallery.index('all')}">
+                                        <i class="nav-item-icon icon ion-ios7-albums-outline"></i>
+                                        All
+                                    </a>
+                                </li><!-- /magic -->
+                            </ul><!-- /layouts child -->
+                        </li>
+                        <li class="side-nav-item">
+                            <a href="#tags">
+                                <i class="nav-item-caret"></i>
+                                <i class="nav-item-icon icon glyphicon glyphicon-tags"></i>
+                                Tags
+                            </a>
+                            <ul id="tags" class="side-nav-child">
+                                <li class="side-nav-item-heading">
+                                    <a href="#" class="side-nav-back">
+                                        <i class="nav-item-caret"></i>
+                                        Tags
+                                    </a>
+                                </li><!-- /header layouts child -->
+                                <li class="side-nav-item">
+                                    <a href="@{Tags.search}">
+                                        <i class="nav-item-icon icon glyphicon glyphicon-search"></i>
+                                        Search
+                                    </a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a href="@{Tags.list}">
+                                        <i class="nav-item-icon icon glyphicon glyphicon-list"></i>
+                                        List
+                                    </a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a href="@{Tags.newTag}">
+                                        <i class="nav-item-icon icon glyphicon glyphicon-tag"></i>
+                                        New
+                                    </a>
+                                </li><!-- /blank -->
+                            </ul><!-- /layouts child -->
+                        </li>
+                        <li class="side-nav-item">
+                            <a href="@{Upload.index}">
+                                <i class="nav-item-icon icon glyphicon glyphicon-cloud-upload"></i>
+                                Upload
+                            </a>
+                        </li>
+                    </ul><!-- /nav ul-->
+                </nav>
+
+            </div><!-- /side body -->
+        </aside><!-- /side left -->
+        <section id="content" class="content">
+            <header class="content-header">
+                <div class="header-actions pull-left">
+                    <button id="toggle-content" class="btn btn-icon" type="button"><i class="icon ion-navicon-round"></i></button>
+                    <button id="toggle-search" class="btn btn-icon" type="button"><i class="icon ion-search"></i></button>
+                </div><!-- /header actions -->
+
+                <h1 class="content-title" style="text-transform: capitalize;">#{get 'title' /}</h1>
+            </header><!-- /side left -->
+
+            <div class="content-spliter">
+                <section id="content-main" class="content-main">
+                    <div class="content-app">
+                        <div class="app-body">
+                            #{doLayout /}
+                        </div><!-- /app body -->
+                    </div><!-- /content app -->
+                </section><!-- /content main -->
+            </div><!-- /content spliter -->
+
+        </section><!-- /content -->
+    </section><!-- /wrapper -->
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body…</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-flat btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-flat btn-primary">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+    <script src="assets/jquery/jquery.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/app/js/dependencies.js"></script>
+    <script src="assets/jquery-icheck/jquery.icheck.min.js"></script>
+    <script src="assets/jquery-tags-input/jquery.tagsinput.min.js"></script>
+    <script src="assets/select2/select2.min.js"></script>
+    <script src="assets/multiselect/js/jquery.multi-select.js"></script>
+    <script src="assets/bootstrap-jasny/js/inputmask.js"></script>
+    <script src="assets/bootstrap-jasny/js/fileinput.js"></script>
+    <script src="assets/moment/moment.min.js"></script>
+    <script src="assets/bootstrap3-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="assets/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="assets/mjaalnir-bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+    <script src="assets/jquery-simplecolorpicker/jquery.simplecolorpicker.js"></script>
+    <script src="assets/app/js/main.js"></script>
+    <script src="assets/app-demo/form_elements.js"></script>
+    <script type="text/javascript">
+
+    $(function() {
+        'use strict';
+
+        // checkbox and radio with iCheck
+        // Initialize all components iCheck
+        $('.iCheck').each(function(){
+            // var each element .iCheck
+            var $this = $(this),
+                skin = $this.attr('data-skin'),
+                color = $this.attr('data-color'),
+                checkbox, radio, insert = '';
+
+            /**
+             * default usage skin
+             *
+             * Skins options:
+             * @data-skin minimalis
+             * @data-skin square
+             * @data-skin flat
+             * @data-skin line
+             * @data-skin polaris
+             * @data-skin futurico
+             */
+            if (skin === undefined) {
+                checkbox = 'icheckbox_minimal';
+                radio = 'iradio_minimal';
+            }
+            else{
+                checkbox = 'icheckbox_' + skin;
+                radio = 'iradio_' + skin;
+            }
+
+            /**
+             * default usage color
+             *
+             * Available colors:
+             * @data-color black
+             * @data-color red
+             * @data-color green
+             * @data-color blue
+             * @data-color aero
+             * @data-color grey
+             * @data-color orange
+             * @data-color yellow
+             * @data-color pink
+             * @data-color purple
+             */
+            if (color !== undefined) {
+                checkbox = checkbox + '-' + color;
+                radio = radio + '-' + color;
+            }
+
+            // handle iCheck skin 'line'
+            if (skin == 'line') {
+                var label = $this.next(),
+                    label_text = label.text();
+
+                insert = '<div class="icheck_line-icon"></div>' + label_text;
+                label.remove();
+            }
+
+            // initialize
+            $this.iCheck({
+                checkboxClass: checkbox,
+                radioClass: radio,
+                insert: insert,
+                increaseArea: '20%' // optional
+            });
+        });
+        // end iCheck
+
+
+
+        // tags input
+        $('#tags-input1').tagsInput({
+            height: "32px",
+            width:'auto',           // support percent (90%)
+        });
+        $('#tags-input2').tagsInput({
+            width:'auto',
+            defaultText: 'Add Tag',
+            onChange: function(elem, elem_tags)
+            {
+                var languages = ['php','ruby','javascript'];
+                $('.tag', elem_tags).each(function()
+                {
+                    if($(this).text().search(new RegExp('\\b(' + languages.join('|') + ')\\b')) >= 0){
+                        $(this).css({
+                            'border-color': '#2980b9',
+                            'background-color': '#3498db',
+                            'color': '#ecf0f1'
+                        });
+                    }
+                });
+            }
+        });
+        // manual style for .tagsinput
+        $('div.tagsinput input').on('focus', function(){
+            var tagsinput = $(this).parent().parent();
+            tagsinput.addClass('focus');
+        }).on('focusout', function(){
+            var tagsinput = $(this).parent().parent();
+            tagsinput.removeClass('focus');
+        });
+        // end tags input
+
+
+
+        // select2
+        $(".select2").select2();
+
+
+        // multiselect
+        $(".multiselect").multiSelect();
+
+
+        // bootstrap3-datetimepicker
+        $('#datetimepicker1').datetimepicker({
+            icons : {
+                time: 'icon ion-ios7-clock-outline',
+                date: 'icon ion-ios7-calendar-outline',
+                up:   'icon ion-ios7-arrow-up',
+                down: 'icon ion-ios7-arrow-down'
+            }
+        });
+        $('#datetimepicker2').datetimepicker({
+            icons : {
+                time: 'icon ion-ios7-clock-outline',
+                date: 'icon ion-ios7-calendar-outline',
+                up:   'icon ion-ios7-arrow-up',
+                down: 'icon ion-ios7-arrow-down'
+            },
+            pickDate: false
+        });
+        $('#datetimepicker3').datetimepicker({
+            icons : {
+                time: 'icon ion-ios7-clock-outline',
+                date: 'icon ion-ios7-calendar-outline',
+                up:   'icon ion-ios7-arrow-up',
+                down: 'icon ion-ios7-arrow-down'
+            },
+            pickTime: false
+        });
+        $('#datetimepicker4').datetimepicker({
+            icons : {
+                time: 'icon ion-ios7-clock-outline',
+                date: 'icon ion-ios7-calendar-outline',
+                up:   'icon ion-ios7-arrow-up',
+                down: 'icon ion-ios7-arrow-down'
+            }
+        });
+
+
+
+        // date range picker
+        $('#daterangepicker1').daterangepicker();
+        $('#daterangepicker2').daterangepicker(
+            {
+              ranges: {
+                 'Today': [moment(), moment()],
+                 'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
+                 'Last 7 Days': [moment().subtract('days', 6), moment()],
+                 'Last 30 Days': [moment().subtract('days', 29), moment()],
+                 'This Month': [moment().startOf('month'), moment().endOf('month')],
+                 'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+              },
+              startDate: moment().subtract('days', 29),
+              endDate: moment()
+            },
+            function(start, end) {
+                $('#daterangepicker2 .text-date').text(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            }
+        );
+
+
+
+
+        // colorpicker
+        $('.colorpicker').colorpicker();
+        $('#simpleColorpicker1').simplecolorpicker({
+            theme: 'glyphicons'
+        });
+        $('#simpleColorpicker2').simplecolorpicker({
+            picker: true,
+            theme: 'glyphicons'
+        });
+    });
+
+    </script>
+    #{get 'moreScripts'/}
+  </body>
+</html>

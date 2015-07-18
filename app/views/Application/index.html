@@ -1,0 +1,60 @@
+#{extends '/syrena/template.html' /}
+#{set title:'Home' /}
+
+#{if flash.success}
+    <div class="alert alert-success alert-icon">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <div class="icon"><i class="icon ion-ios7-checkmark-empty"></i></div>
+        <strong>Well done!</strong> ${flash.success} <a class="alert-link" href="#"> <span id="seuIp"></span></a>
+    </div>
+#{/if}
+
+<div id="carousel-text" class="carousel full-line slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-text" data-slide-to="0" class=""></li>
+        <li data-target="#carousel-text" data-slide-to="1" class="active"></li>
+        <li data-target="#carousel-text" data-slide-to="2" class=""></li>
+    </ol><!-- /carousel-indicator -->
+    <div class="carousel-inner">
+        <div class="item item-text-only bg-wisteria">
+            <div class="carousel-caption">
+                <h3>Seja bem-vindo ao TAPDATASS!</h3>
+                <p>Espanque essas bundas!.</p>
+            </div>
+        </div>
+        <div class="item item-text-only bg-turquoise active">
+            <div class="carousel-caption">
+                <h3>Novas Fotos!</h3>
+                <p>Clique em galeria e depois em newst.</p>
+            </div>
+        </div>
+        <div class="item item-text-only bg-alizarin">
+            <div class="carousel-caption">
+                <h3>Caption 3</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, ratione.</p>
+            </div>
+        </div>
+    </div><!-- /carousel-inner -->
+
+    <a class="left carousel-control" href="#carousel-text" data-slide="prev">
+        <span class="ion-prev icon ion-ios7-arrow-left"></span>
+    </a>
+    <a class="right carousel-control" href="#carousel-text" data-slide="next">
+        <span class="ion-next icon ion-ios7-arrow-right"></span>
+    </a>
+</div>
+
+<div class="panel-body">
+    <button class="btn btn-ion btn-primary" data-toggle="modal" data-target="#myModal">
+        Launch demo modal
+    </button>
+</div>
+
+#{set 'moreScripts'}
+    <script type="text/javascript">
+        $('#seuIp').load('http://api.ipify.org?format=text');
+    </script>
+#{/set}
+
+#{set 'moreStyles'}
+#{/set}

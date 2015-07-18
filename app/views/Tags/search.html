@@ -1,0 +1,32 @@
+#{extends '/syrena/template.html' /}
+#{set title:'Search' /}
+
+#{form @Tags.search(), enctype:'multipart/form-data'}
+    #{dropDown tags:tags /}
+    <input class="btn btn-ion" type="submit" value="Select">
+#{/form}
+
+#{photoDisplay photos:photos, as:'magic-layout3'/}
+
+#{set 'moreScripts'}
+    <script type="text/javascript">
+       var winAction = #{jsAction @Gallery.addWin(':id') /}
+       var loseAction = #{jsAction @Gallery.addLose(':id') /}
+       function addWin(photoId) {
+           $('#winId'+photoId).load(
+               winAction({id: photoId}),
+               function() {
+                   $('#content').css('visibility', 'visible')
+               }
+            )
+        }
+        function addLose(photoId) {
+           $('#loseId'+photoId).load(
+               loseAction({id: photoId}),
+               function() {
+                   $('#content').css('visibility', 'visible')
+               }
+            )
+        }
+    </script>
+#{/set}

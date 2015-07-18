@@ -1,0 +1,44 @@
+#{extends '/syrena/template.html' /}
+#{set title:'Gallery' /}
+
+#{if flash.success}
+    <p class="success">${flash.success}${mode}</p>
+#{/if}
+
+#{photoDisplay photos:photos, as:'magic-layout3'/}
+
+#{set 'moreStyles'}
+    <style type="text/css" rel="stylesheet">
+        .success {
+            background: #67AD10;
+            color: #fff;
+            padding: 10px;
+            -webkit-border-radius: 6px;
+            -moz-border-radius: 6px;
+            -webkit-box-shadow: 0 2px 0 #4E840B;
+        }
+    </style>
+#{/set}
+
+#{set 'moreScripts'}
+<script type="text/javascript">
+       var winAction = #{jsAction @Gallery.addWin(':id') /}
+       var loseAction = #{jsAction @Gallery.addLose(':id') /}
+       function addWin(photoId) {
+           $('#winId'+photoId).load(
+               winAction({id: photoId}),
+               function() {
+                   $('#content').css('visibility', 'visible')
+               }
+            )
+        }
+        function addLose(photoId) {
+           $('#loseId'+photoId).load(
+               loseAction({id: photoId}),
+               function() {
+                   $('#content').css('visibility', 'visible')
+               }
+            )
+        }
+    </script>
+#{/set}
