@@ -10,8 +10,6 @@ POST    /tags/edit                              Tags.edit
 POST    /tags/delete                            Tags.delete
 POST    /photos/delete                          Photos.delete
 POST    /photos/addPhoto                        Photos.addPhoto
-POST    /photos/addWin                          Photos.addWin
-POST    /photos/addLose                         Photos.addLose
 
 GET     /                                       Application.index
 GET     /upload                                 Application.upload
@@ -21,6 +19,8 @@ GET     /tags/search                            Tags.search
 GET     /tags/list                              Tags.list
 GET     /tags/new                               Tags.newTag
 
+GET    /photos/addWin/{photoId}                           Photos.addWin
+GET    /photos/addLose/{photoId}                          Photos.addLose
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

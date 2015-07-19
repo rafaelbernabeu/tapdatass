@@ -9,6 +9,6 @@ public class BootstrapStop extends Job {
 
     @Override
     public void doJob() throws Exception {
-
+        System.out.println("BYE!");
     }
 }

@@ -12,6 +12,7 @@
     <script type="text/javascript">
        var winAction = #{jsAction @Photos.addWin(':id') /}
        var loseAction = #{jsAction @Photos.addLose(':id') /}
+
        function addWin(photoId) {
            $('#winId'+photoId).load(
                winAction({id: photoId}),

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by rafael on 17/07/15.
+ * Created by rafael bernabeu on 17/07/15.
  */
 public class Photos extends Controller {
 
