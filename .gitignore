@@ -1,24 +1,22 @@
 /date/
 
 # Ignore Play! working directory #
-bin/
+/bin
 /db
-.eclipse
-/lib/
-/logs/
+/lib
+/tmp
+/logs
+/dist
+/target
 /modules
 /project/project
 /project/target
-/target
-tmp/
-test-result
+/test-result
 server.pid
+.eclipse
 *.iml
 *.eml
-/dist/
 .cache
-
-*.class
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

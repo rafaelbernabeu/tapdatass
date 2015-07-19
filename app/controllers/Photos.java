@@ -29,6 +29,7 @@ public class Photos extends Controller {
     public static void addPhoto(Photo photo, @Required String[] tags) { //receber objeto TAG ao invez de string[]
         checkAuthenticity();
         if(validation.hasErrors()) {
+            flash.error("Selecione uma TAG!");
             Application.upload();
         }
         photo.save();

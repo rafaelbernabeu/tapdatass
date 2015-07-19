@@ -1,12 +1,13 @@
 #{extends '/syrena/template.html' /}
 #{set title:'Upload' /}
 
-#{ifErrors}
-    <h2>
-        ${errors[0]}
-        ${errors[1]}
-    </h2>
-#{/ifErrors}
+#{if flash.error}
+    <div class="alert alert-danger alert-icon">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <div class="icon"><i class="icon ion-ios7-close-empty"></i></div>
+        <strong>${flash.error}</strong>
+    </div>
+#{/if}
 
 #{form @Photos.addPhoto(), method:'POST', enctype:'multipart/form-data'}
 

@@ -1,27 +1,15 @@
 package controllers;
 
-import models.PhotoTag;
-import models.Tag;
 import models.Photo;
+import models.Tag;
 import play.mvc.Controller;
-import utils.Utils;
 
-import javax.sql.rowset.serial.SerialBlob;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.sql.Blob;
-import java.util.*;
+import java.util.List;
 
 public class Application extends Controller {
 
-    private static boolean firstTime = true;
-
     public static void index() {
-        if (firstTime) {
-            flash.success("Bem-Vindo Mlk Doido!!! Zoa não... sei teu IP >>> ");
-//            firstTime = false;
-        }
+        flash.success("Bem-Vindo! SEU IP >>> ");
         render();
     }
 
