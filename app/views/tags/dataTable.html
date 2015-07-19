@@ -33,12 +33,12 @@
                         <td class="center">${tag.getKey().getName()}</td>
                         <td>${tag.getValue()}</td>
                         <td class="center">
-                            #{form @Tags.edit(), enctype:'multipart/form-data'}
+                            #{form @Tags.edit(), method:'POST', enctype:'multipart/form-data'}
                                 <button type="submit" class="btn btn-default btn-xs" name="id" value="${tag.getKey().getId()}">Edit</button>
                             #{/form}
-                                #{form @Tags.delete(), enctype:'multipart/form-data'}
-                                    <button type="submit" class="btn btn-default btn-xs" value="${tag.getKey().getId()}" name="id">Delete</button>
-                                #{/form}
+                            #{form @Tags.delete(), method:'POST', enctype:'multipart/form-data'}
+                                <button type="submit" class="btn btn-default btn-xs" value="${tag.getKey().getId()}" name="id">Delete</button>
+                            #{/form}
                         </td>
                     </tr>
                 #{/list}

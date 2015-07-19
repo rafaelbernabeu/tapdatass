@@ -28,6 +28,7 @@ public class Tags extends Controller {
         List<PhotoTag> photoTags;
         List<Tag> tags = Tag.findAll();
         if (tag != null && !tag.equals("")) {
+            checkAuthenticity();
             photoTags = PhotoTag.em().createQuery("SELECT p " +
                     "FROM PhotoTag p " + //SQL INJECTION HERE
                     "WHERE p.tag IN (" + tag + ")")
@@ -42,6 +43,7 @@ public class Tags extends Controller {
 
     public static void newTag(String tag) {
         if (tag != null) {
+            checkAuthenticity();
             Tag t = new Tag();
             t.setName(tag);
             t.save();
@@ -51,19 +53,24 @@ public class Tags extends Controller {
     }
 
     public static void edit(long id, String name) {
-        Tag tag = Tag.findById(id);
-        if (id != 0 && name != null && !name.equals("")) {
-            tag.setName(name);
-            tag.save();
-            list();
+        Tag tag = null;
+        if (id != 0) {
+            checkAuthenticity();
+            tag = Tag.findById(id);
+            if (tag != null && name != null && !name.equals("")) {
+                tag.setName(name);
+                tag.save();
+                list();
+            }
+        } else {
+            tag = new Tag("");
         }
         String title = "Edit";
-
-        if (tag == null) { tag = new Tag("");}
         render("/Tags/edit.html", title, id, tag);
     }
 
     public static void delete(long id) {
+        checkAuthenticity();
         Tag t = Tag.findById(id);
         t.delete();
         list();

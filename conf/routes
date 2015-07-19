@@ -3,29 +3,34 @@
 # ~~~~
 
 # Home page
-GET     /                                       Application.index
-GET     /addWin                                 Application.addWin
-GET     /addLose                                Application.addLose
-GET     /gallery                                Gallery.index
-GET     /upload                                 Upload.index
-GET     /tags/search                            Tags.search
-GET     /tags/list                              Tags.list
-GET     /tags/new                               Tags.edit
 
+POST    /tags/new                               Tags.newTag
+POST    /tags/search                            Tags.search
 POST    /tags/edit                              Tags.edit
 POST    /tags/delete                            Tags.delete
 POST    /photos/delete                          Photos.delete
+POST    /photos/addPhoto                        Photos.addPhoto
+POST    /photos/addWin                          Photos.addWin
+POST    /photos/addLose                         Photos.addLose
 
+GET     /                                       Application.index
+GET     /upload                                 Application.upload
+GET     /gallery/{mode}                         Application.gallery
+GET     /loadPhotos                             Photos.loadPhotos
+GET     /tags/search                            Tags.search
+GET     /tags/list                              Tags.list
+GET     /tags/new                               Tags.newTag
 
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
 # Map static resources from the /app/public folder to the /public path
+GET     /date/                                  staticDir:date/
 GET     /public/                                staticDir:public
 GET     /assets/                                staticDir:app/views/syrena/assets
 GET     /tags/assets/                           staticDir:app/views/syrena/assets
-GET     /date/                                  staticDir:date/
+GET     /gallery/assets/                        staticDir:app/views/syrena/assets
 
 # Catch all
-*       /{controller}/{action}                  {controller}.{action}
+#*       /{controller}/{action}                  {controller}.{action}

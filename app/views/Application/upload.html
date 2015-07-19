@@ -8,7 +8,7 @@
     </h2>
 #{/ifErrors}
 
-#{form @addPhoto(), enctype:'multipart/form-data'}
+#{form @Photos.addPhoto(), method:'POST', enctype:'multipart/form-data'}
 
     <div class="form-group">
         <div class="fileinput fileinput-new" data-provides="fileinput"><input type="hidden">
@@ -28,4 +28,4 @@
 
 #{/form}
 
-<a href="@{Application.loadPhotos()}">LOAD Photos</a>
+<a href="@{Photos.loadPhotos()}">LOAD Photos</a>

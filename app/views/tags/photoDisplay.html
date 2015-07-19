@@ -14,7 +14,7 @@
                     </p>
                 </div><!-- /panel-body -->
                 <div class="panel-footer">
-                    #{form @Photos.delete(), enctype:'multipart/form-data'}
+                    #{form @Photos.delete(), method:'POST', enctype:'multipart/form-data'}
                         <input type="hidden" name="id" value="${photo.id}">
                         <input type="submit" value="Delete" class="btn btn-default btn-sm pull-right">
                     #{/form}
