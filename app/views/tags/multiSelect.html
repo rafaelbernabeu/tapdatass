@@ -2,7 +2,7 @@
     <div class="box magic-element">
         <h2 class="box-heading">Tags</h2>
             <div class="form-group">
-                <select class="multiselect" multiple="multiple" name="tags[]">
+                <select class="multiselect" multiple="multiple" name="tags">
                     #{list items:_tags, as:'tag'}
                         <option value="${tag.id}">${tag.name}</option>
                     #{/list}

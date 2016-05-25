@@ -10,17 +10,18 @@ POST    /tags/edit                              Tags.edit
 POST    /tags/delete                            Tags.delete
 POST    /photos/delete                          Photos.delete
 POST    /photos/addPhoto                        Photos.addPhoto
+POST    /photos/addFolder                       Photos.addFolder
 
 GET     /                                       Application.index
-GET     /upload                                 Application.upload
+GET     /uploadFile                             Application.uploadFile
+GET     /uploadFolder                           Application.uploadFolder
 GET     /gallery/{mode}                         Application.gallery
-GET     /loadPhotos                             Photos.loadPhotos
 GET     /tags/search                            Tags.search
 GET     /tags/list                              Tags.list
 GET     /tags/new                               Tags.newTag
 
-GET    /photos/addWin/{photoId}                           Photos.addWin
-GET    /photos/addLose/{photoId}                          Photos.addLose
+GET    /photos/addWin/{photoId}                 Photos.addWin
+GET    /photos/addLose/{photoId}                Photos.addLose
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

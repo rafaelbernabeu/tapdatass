@@ -128,10 +128,31 @@
                             </ul><!-- /layouts child -->
                         </li>
                         <li class="side-nav-item">
-                            <a href="@{Application.upload}">
+                            <a href="#upload">
+                                <i class="nav-item-caret"></i>
                                 <i class="nav-item-icon icon glyphicon glyphicon-cloud-upload"></i>
                                 Upload
                             </a>
+                            <ul id="upload" class="side-nav-child">
+                                <li class="side-nav-item-heading">
+                                    <a href="#" class="side-nav-back">
+                                        <i class="nav-item-caret"></i>
+                                        Upload
+                                    </a>
+                                </li><!-- /header layouts child -->
+                                <li class="side-nav-item">
+                                    <a href="@{Application.uploadFile}">
+                                        <i class="nav-item-icon icon glyphicon glyphicon-search"></i>
+                                        File
+                                    </a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a href="@{Application.uploadFolder}">
+                                        <i class="nav-item-icon icon glyphicon glyphicon-list"></i>
+                                        Folder
+                                    </a>
+                                </li>
+                            </ul><!-- /layouts child -->
                         </li>
                     </ul><!-- /nav ul-->
                 </nav>
@@ -148,10 +169,28 @@
                 <h1 class="content-title" style="text-transform: capitalize;">#{get 'title' /}</h1>
             </header><!-- /side left -->
 
+
+
             <div class="content-spliter">
                 <section id="content-main" class="content-main">
                     <div class="content-app">
                         <div class="app-body">
+                            #{if flash.success}
+                                <div class="alert alert-success alert-icon">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <div class="icon"><i class="icon ion-ios7-checkmark-empty"></i></div>
+                                    <strong>${flash.success}</strong>
+                                </div>
+                            #{/if}
+
+                            #{if flash.error}
+                                <div class="alert alert-danger alert-icon">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <div class="icon"><i class="icon ion-ios7-close-empty"></i></div>
+                                    <strong>${flash.error}</strong>
+                                </div>
+                            #{/if}
+
                             #{doLayout /}
                         </div><!-- /app body -->
                     </div><!-- /content app -->

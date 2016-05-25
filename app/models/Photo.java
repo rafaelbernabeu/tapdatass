@@ -1,10 +1,16 @@
 package models;
 
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import play.db.jpa.Blob;
 import play.db.jpa.Model;
 
-import javax.persistence.*;
-import java.util.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by rafael on 13/06/15.
@@ -88,5 +94,10 @@ public class Photo extends Model {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
     }
 }

@@ -2,7 +2,7 @@ package models;
 
 import play.db.jpa.Model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
 import java.util.Date;
 
 /**

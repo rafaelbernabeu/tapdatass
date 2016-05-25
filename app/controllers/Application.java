@@ -12,7 +12,6 @@ import java.util.List;
 public class Application extends Controller {
 
     public static void index() {
-        flash.success("Bem-Vindo! SEU IP >>> ");
         render();
     }
 
@@ -32,8 +31,13 @@ public class Application extends Controller {
         render(photos, mode);
     }
 
-    public static void upload() {
+    public static void uploadFile() {
         List<Tag> tags = Tag.findAll();
-        render("/Application/upload.html", tags);
+        render("/Application/uploadFile.html", tags);
+    }
+
+    public static void uploadFolder() {
+        List<Tag> tags = Tag.findAll();
+        render("/Application/uploadFolder.html", tags);
     }
 }

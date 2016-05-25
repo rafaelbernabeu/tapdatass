@@ -1,8 +1,6 @@
 #{extends '/syrena/template.html' /}
 #{set title:title /}
 
-#{panel /}
-
 #{if title == "New"}
     #{form @Tags.newTag(), method:'POST', enctype:'multipart/form-data'}
     <div class="col-sm-10">

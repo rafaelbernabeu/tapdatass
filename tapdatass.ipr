@@ -173,6 +173,6 @@
     <output url="file://$PROJECT_DIR$/tmp/classes" />
   </component>
   <component name="VcsDirectoryMappings">
-    <mapping directory="" vcs="" />
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
 </project>

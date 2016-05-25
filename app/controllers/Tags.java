@@ -5,7 +5,9 @@ import models.PhotoTag;
 import models.Tag;
 import play.mvc.Controller;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by rafael bernabeu on 06/07/15.
