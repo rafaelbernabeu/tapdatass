@@ -1,7 +1,6 @@
 package controllers;
 
 import models.Photo;
-import models.PhotoTag;
 import models.Tag;
 import play.data.validation.Required;
 import play.db.jpa.Blob;
@@ -12,8 +11,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by rafael bernabeu on 17/07/15.
@@ -32,55 +32,64 @@ public class Photos extends Controller {
             flash.error("Selecione uma TAG!");
             Application.uploadFile();
         }
-        photo.save();
-        String ids = "";
-        if (tags != null) {
-            for (String t : tags) {
-                ids += t + ", ";
-            }
-            ids = ids.substring(0, ids.length() - 2); //SQL INJECTION!!!!
-            List<Tag> tagList = Tag.em().createQuery("SELECT t FROM Tag t WHERE id IN (" + ids + ")").getResultList();
-            for (Tag tag : tagList) {
-                new PhotoTag(photo, tag).save();
+        List<String> md5List = Photo.em().createNativeQuery("SELECT md5 FROM photo").getResultList();
+        String md5NewFile = FileUtils.getMD5(photo.getBlob().getFile());
+        boolean exists = false;
+        if (md5List.size() > 0) {
+            for (String md5BD : md5List) {
+                if (md5BD.equals(md5NewFile)) {
+                    exists = true;
+                }
             }
         }
-        //photo.save();
+        if (!exists) {
+            String ids = "";
+            if (tags != null) {
+                for (String t : tags) {
+                    ids += t + ", ";
+                }
+                ids = ids.substring(0, ids.length() - 2); //SQL INJECTION!!!!
+                Set<Tag> tagList = new HashSet<>(Tag.em().createQuery("SELECT t FROM Tag t WHERE id IN (" + ids + ")").getResultList());
+                photo.setTags(tagList);
+            }
+            photo.setMd5(md5NewFile);
+            photo.save();
+        }
         Application.gallery("newest");
     }
 
     public static void addFolder(File[] files) {
-        List<String> photosMd5New = new ArrayList<>();
-        List<String> photosMd5BD = Photo.em().createNativeQuery("SELECT md5 FROM photo").getResultList();
+        checkAuthenticity();
+        List<String> md5List = Photo.em().createNativeQuery("SELECT md5 FROM photo").getResultList();
+        Tag tag = new Tag("UploadFolder");
+        tag.save();
         for (File file : files) {
             if (Files.isRegularFile(Paths.get(file.getAbsolutePath())) && FileUtils.isImage(file.getName())) {
                 try {
-                    String md5 = FileUtils.getMD5(file);
-                    //System.out.println(md5);
-                    int cont = 0;
-
-                    if (photosMd5BD.size() > 0) {
-                        for (String md5BD : photosMd5BD) {
-                            if (md5BD.equalsIgnoreCase(md5)) {
-                                cont++;
+                    String md5NewFile = FileUtils.getMD5(file);
+                    System.out.println(md5NewFile);
+                    boolean exists = false;
+                    if (md5List.size() > 0) {
+                        for (String md5BD : md5List) {
+                            if (md5BD.equals(md5NewFile)) {
+                                exists = true;
                             }
                         }
-                    } else {
-                        for (String md5New : photosMd5New) {
-                            if (md5New.equalsIgnoreCase(md5)) {
-                                cont++;
-                            }
-                        }
-                        photosMd5New.add(md5);
                     }
-                    if (cont == -10) {
+                    if (!exists) {
                         Blob blob = new Blob();
                         blob.set(new FileInputStream(file), "image");
                         Photo p = new Photo();
-                        p.setPhotoBytes(blob);
-                        p.setMd5(md5);
+                        p.setBlob(blob);
+                        p.setMd5(md5NewFile);
+                        p.save();
+                        Set<Tag> tags = new HashSet<>();
+                        tags.add(tag);
+                        p.setTags(tags);
                         p.save();
                     }
-                    cont = 0;
+                    md5List.add(md5NewFile);
+                    exists = false;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -1,13 +1,6 @@
 #{extends '/syrena/template.html' /}
-#{set title:'Home' /}
 
-#{if flash.success}
-    <div class="alert alert-success alert-icon">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <div class="icon"><i class="icon ion-ios7-checkmark-empty"></i></div>
-        <strong>Well done!</strong> ${flash.success} <a class="alert-link" href="#"> <span id="seuIp"></span></a>
-    </div>
-#{/if}
+#{set title:'Home' /}
 
 <div id="carousel-text" class="carousel full-line slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -57,4 +50,5 @@
 #{/set}
 
 #{set 'moreStyles'}
+
 #{/set}

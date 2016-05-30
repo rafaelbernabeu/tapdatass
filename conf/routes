@@ -15,6 +15,7 @@ POST    /photos/addFolder                       Photos.addFolder
 GET     /                                       Application.index
 GET     /uploadFile                             Application.uploadFile
 GET     /uploadFolder                           Application.uploadFolder
+GET     /uploadWeb                              Application.uploadWeb
 GET     /gallery/{mode}                         Application.gallery
 GET     /tags/search                            Tags.search
 GET     /tags/list                              Tags.list

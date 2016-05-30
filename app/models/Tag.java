@@ -5,10 +5,8 @@ import play.db.jpa.Model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.ManyToMany;
+import java.util.Set;
 
 /**
  * Created by rafael on 13/06/15.
@@ -20,14 +18,10 @@ public class Tag extends Model {
         this.name = name;
     }
 
-    public Tag() {
-        this.name = "";
-    }
-
     private String name;
 
-    @OneToMany(mappedBy = "tag", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<PhotoTag> photos = new ArrayList<PhotoTag>();
+    @ManyToMany(mappedBy = "tags", cascade = CascadeType.REMOVE)
+    private Set<Photo> photos;
 
     public String getName() {
         return name;
@@ -37,11 +31,11 @@ public class Tag extends Model {
         this.name = name;
     }
 
-    public List<PhotoTag> getPhotos() {
+    public Set<Photo> getPhotos() {
         return photos;
     }
 
-    public void setPhotos(List<PhotoTag> photos) {
+    public void setPhotos(Set<Photo> photos) {
         this.photos = photos;
     }
 

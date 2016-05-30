@@ -1,16 +1,23 @@
 #{extends '/syrena/template.html' /}
-#{set title:'Gallery' /}
+#{set title:'Upload Web' /}
 
-#{photoDBDisplay photos:photos, as:'magic-layout3'/}
+#{form @Application.uploadWeb(), method:'GET', enctype:'multipart/form-data'}
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="input1" placeholder="http://www.example.com/" name="url">
+    </div>
+    <input class="btn btn-ion" type="submit" value="Save">
+#{/form}
+
+#{photoWebDisplay photos:photos, as:'magic-layout3'/}
 
 #{set 'moreStyles'}
-    <style type="text/css" rel="stylesheet">
+<style type="text/css" rel="stylesheet">
 
-    </style>
+</style>
 #{/set}
 
 #{set 'moreScripts'}
-    <script type="text/javascript">
+<script type="text/javascript">
        var winAction = #{jsAction @Photos.addWin(':id') /}
        var loseAction = #{jsAction @Photos.addLose(':id') /}
 

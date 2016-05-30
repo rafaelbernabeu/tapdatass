@@ -1,9 +1,9 @@
 #{extends '/syrena/template.html' /}
-#{set title:'Upload' /}
+#{set title:'Upload Folder' /}
 
 #{form @Photos.addFolder(), method:'POST', enctype:'multipart/form-data'}
 
     <input type="file" name="files" webkitdirectory directory multiple/>
-    <input type="submit"/>
+    <input type="submit" value="Enviar"/>
 
 #{/form}

@@ -1,5 +1,6 @@
 package models;
 
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
@@ -26,7 +27,6 @@ public class Comment extends Model {
     private Date date;
     private String comment;
     private String author;
-
     private String emailAuthor;
 
     public Date getDate() {
@@ -59,5 +59,10 @@ public class Comment extends Model {
 
     public void setEmailAuthor(String emailAuthor) {
         this.emailAuthor = emailAuthor;
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
     }
 }

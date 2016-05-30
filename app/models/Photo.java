@@ -6,11 +6,10 @@ import play.db.jpa.Model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by rafael on 13/06/15.
@@ -19,33 +18,34 @@ import java.util.List;
 public class Photo extends Model {
 
     public Photo() {
-        this.photoBytes = new Blob();
+        this.blob = new Blob();
         this.md5 = "";
-        this.wins = 0l;
+        this.likes = 0l;
         this.loses = 0l;
         this.comments = null;
         this.tags = null;
-        this.date = new Date();
+        this.dateUpload = new Date();
     }
 
-    private Blob photoBytes;
+    private Blob blob;
     private String md5;
+    private long likes;
     private long wins;
     private long loses;
-    private Date date;
+    private Date dateUpload;
 
     @OneToMany
-    private List<Comment> comments;
+    private Set<Comment> comments;
 
-    @OneToMany(mappedBy = "photo", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<PhotoTag> tags = new ArrayList<PhotoTag>();
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<Tag> tags;
 
-    public Blob getPhotoBytes() {
-        return photoBytes;
+    public Blob getBlob() {
+        return blob;
     }
 
-    public void setPhotoBytes(Blob photoBytes) {
-        this.photoBytes = photoBytes;
+    public void setBlob(Blob blob) {
+        this.blob = blob;
     }
 
     public String getMd5() {
@@ -54,6 +54,14 @@ public class Photo extends Model {
 
     public void setMd5(String md5) {
         this.md5 = md5;
+    }
+
+    public long getLikes() {
+        return likes;
+    }
+
+    public void setLikes(long likes) {
+        this.likes = likes;
     }
 
     public long getWins() {
@@ -72,28 +80,28 @@ public class Photo extends Model {
         this.loses = loses;
     }
 
-    public List<Comment> getComments() {
+    public Date getDateUpload() {
+        return dateUpload;
+    }
+
+    public void setDateUpload(Date dateUpload) {
+        this.dateUpload = dateUpload;
+    }
+
+    public Set<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(Set<Comment> comments) {
         this.comments = comments;
     }
 
-    public List<PhotoTag> getTags() {
+    public Set<Tag> getTags() {
         return tags;
     }
 
-    public void setTags(List<PhotoTag> tags) {
+    public void setTags(Set<Tag> tags) {
         this.tags = tags;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     @Override

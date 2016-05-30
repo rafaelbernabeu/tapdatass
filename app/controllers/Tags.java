@@ -1,13 +1,12 @@
 package controllers;
 
 import models.Photo;
-import models.PhotoTag;
 import models.Tag;
 import play.mvc.Controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by rafael bernabeu on 06/07/15.
@@ -26,28 +25,25 @@ public class Tags extends Controller {
     }
 
     public static void search(String tag) {
-        List<Photo> photos = new ArrayList<>();
-        List<PhotoTag> photoTags;
-        List<Tag> tags = Tag.findAll();
+        System.out.println(tag);
+        Set<Photo> photos = null;
         if (tag != null && !tag.equals("")) {
             checkAuthenticity();
-            photoTags = PhotoTag.em().createQuery("SELECT p " +
-                    "FROM PhotoTag p " + //SQL INJECTION HERE
-                    "WHERE p.tag IN (" + tag + ")")
+            List<Tag> t = Tag.em().createQuery("SELECT t " +
+                    "FROM Tag t " + //SQL INJECTION HERE
+                    "WHERE t.id = ?)")
+                    .setParameter(1, Long.valueOf(tag))
                     .getResultList();
-            photos = new ArrayList<Photo>(photoTags.size());
-            for (PhotoTag photoTag : photoTags) {
-                photos.add(photoTag.getPhoto());
-            }
+            photos = t.get(0).getPhotos();
         }
+        List<Tag> tags = Tag.findAll();
         render(tags, photos);
     }
 
     public static void newTag(String tag) {
         if (tag != null) {
             checkAuthenticity();
-            Tag t = new Tag();
-            t.setName(tag);
+            Tag t = new Tag(tag);
             t.save();
         }
         String title = "New";
@@ -74,6 +70,10 @@ public class Tags extends Controller {
     public static void delete(long id) {
         checkAuthenticity();
         Tag t = Tag.findById(id);
+        for (Photo p : t.getPhotos()) {
+            p.delete();
+        }
+        t.setPhotos(null);
         t.delete();
         list();
     }

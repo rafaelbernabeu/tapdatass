@@ -3,24 +3,16 @@
         #{list items:_photos, as:'photo'}
             <div class="panel panel-default magic-element isotope-item" style="position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 281px, 0px);">
                 <div class="kits-media">
-                    <img src="/date/attachments/${photo.photoBytes.UUID}" alt=""/>
+                    <img src="${photo}" alt=""/>
                 </div><!-- /kits-media -->
                 <div class="panel-body">
                     <p>
                         <small class="text-muted">
                             <i class="icon ion-person"></i> Mr. Rab
-                            <i class="icon ion-calendar"></i> ${photo.date}
                         </small>
                     </p>
                 </div><!-- /panel-body -->
                 <div class="panel-footer">
-                    #{form @Photos.delete(), method:'POST', enctype:'multipart/form-data'}
-                        <input type="hidden" name="id" value="${photo.id}">
-                        <input type="submit" value="Delete" class="btn btn-default btn-sm pull-right">
-                    #{/form}
-                        <a href="/date/attachments/${photo.photoBytes.UUID}" class="btn btn-default btn-sm pull-right"><i class="glyphicon glyphicon-cloud-download"></i></a>
-                        <a id="winId${photo.id}" href="#" onclick="addWin(${photo.id})" class="btn btn-default btn-sm"><i class="icon ion-thumbsup"></i> ${photo.wins}</a>
-                        <a id="loseId${photo.id}" href="#" onclick="addLose(${photo.id})" class="btn btn-default btn-sm"><i class="icon ion-thumbsdown"></i> ${photo.loses}</a>
                         <a href="#" class="btn btn-default btn-sm pull-right"><i class="icon ion-social-twitter"></i></a>
                         <a href="#" class="btn btn-default btn-sm pull-right"><i class="icon ion-social-facebook"></i></a>
                         <a href="#" class="btn btn-default btn-sm pull-right"><i class="icon ion-social-googleplus"></i></a>

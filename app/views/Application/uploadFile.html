@@ -1,5 +1,5 @@
 #{extends '/syrena/template.html' /}
-#{set title:'Upload' /}
+#{set title:'Upload File' /}
 
 
 #{form @Photos.addPhoto(), method:'POST', enctype:'multipart/form-data'}
@@ -12,7 +12,7 @@
                     <span class="btn btn-ion btn-primary btn-file">
                         <span class="fileinput-new">Select image</span>
                         <span class="fileinput-exists">Change</span>
-                        <input type="file" name="photo.photoBytes" accept="image/*">
+                        <input type="file" name="photo.blob" accept="image/*">
                     </span>
                 <input class="btn btn-ion btn-success fileinput-exists" type="submit" value="Upload">
             </div>
