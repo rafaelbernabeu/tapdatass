@@ -1,41 +1,23 @@
 #{extends '/syrena/template.html' /}
 #{set title:'Upload Web' /}
 
-#{form @Application.uploadWeb(), method:'GET', enctype:'multipart/form-data'}
-    <div class="col-sm-10">
-        <input type="text" class="form-control" id="input1" placeholder="http://www.example.com/" name="url">
+#{form @Photos.uploadWeb(), method:'GET', enctype:'multipart/form-data'}
+<div class="col-sm-9">
+    <input type="text" class="form-control" id="input1" placeholder="http://www.example.com/" name="url">
+</div>
+<input class="btn btn-ion" type="submit" value="Load">
+<label class="col-sm-1" style="height: 38px; width: 72px; padding-right: 0px;" for="switcher">Auto Save?</label>
+
+<div class="col-sm-1" style="padding-left: 0px; padding-right: 0px; padding-top: 5px;">
+    <div class="switcher-ion">
+        <input type="checkbox" name="switcher" class="switcher-ion-checkbox" id="switcher">
+        <label class="switcher-ion-label" for="switcher">
+            <div class="switcher-ion-inner"></div>
+            <div class="switcher-ion-switch"></div>
+        </label>
     </div>
-    <input class="btn btn-ion" type="submit" value="Save">
+</div>
 #{/form}
-
-#{photoWebDisplay photos:photos, as:'magic-layout3'/}
-
-#{set 'moreStyles'}
-<style type="text/css" rel="stylesheet">
-
-</style>
-#{/set}
-
-#{set 'moreScripts'}
-<script type="text/javascript">
-       var winAction = #{jsAction @Photos.addWin(':id') /}
-       var loseAction = #{jsAction @Photos.addLose(':id') /}
-
-       function addWin(photoId) {
-           $('#winId'+photoId).load(
-               winAction({id: photoId}),
-               function() {
-                   $('#content').css('visibility', 'visible')
-               }
-            )
-        }
-        function addLose(photoId) {
-           $('#loseId'+photoId).load(
-               loseAction({id: photoId}),
-               function() {
-                   $('#content').css('visibility', 'visible')
-               }
-            )
-        }
-    </script>
-#{/set}
+<div class="col-sm-12">
+    #{photoWebDisplay photos:photosUrl, as:'magic-layout3'/}
+</div>

@@ -5,10 +5,9 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.math.BigInteger;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by rafael on 16/06/15.
@@ -51,26 +50,9 @@ public class FileUtils {
         return false;
     }
 
-    private static boolean checkIfNotExists(File file) {
-        List<String> photosMd5New = new ArrayList<>();
-        List<String> photosMd5BD = Photo.em().createNativeQuery("SELECT md5 FROM photo").getResultList();
-        String md5 = FileUtils.getMD5(file);
-        int cont = 0;
-        if (photosMd5BD.size() > 0) {
-            for (String md5BD : photosMd5BD) {
-                if (md5BD.equalsIgnoreCase(md5)) {
-                    cont++;
-                }
-            }
-        } else {
-            for (String md5New : photosMd5New) {
-                if (md5New.equalsIgnoreCase(md5)) {
-                    cont++;
-                }
-            }
-            photosMd5New.add(md5);
-        }
-        return cont == 0;
+    public static boolean checkIfNotExists(String md5) {
+        BigInteger result = (BigInteger) Photo.em().createNativeQuery("select count(id) from photo where md5 = ?").setParameter(1,md5).getSingleResult();
+        return result.compareTo(BigInteger.ZERO) == 0;
     }
 
     private enum TipoImagemEnum {

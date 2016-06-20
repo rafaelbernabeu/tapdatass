@@ -13,10 +13,16 @@
                     </p>
                 </div><!-- /panel-body -->
                 <div class="panel-footer">
-                        <a href="#" class="btn btn-default btn-sm pull-right"><i class="icon ion-social-twitter"></i></a>
-                        <a href="#" class="btn btn-default btn-sm pull-right"><i class="icon ion-social-facebook"></i></a>
-                        <a href="#" class="btn btn-default btn-sm pull-right"><i class="icon ion-social-googleplus"></i></a>
-                </div><!-- /panel-footer -->
+                    #{form @Photos.delete(), method:'POST', enctype:'multipart/form-data'}
+                    <input type="hidden" name="url" value="${photo}">
+                    <input type="button" value="Delete" class="btn btn-default btn-sm pull-right">
+                    #{/form}
+                    <a href="${photo}" class="btn btn-default btn-sm pull-right"><i class="glyphicon glyphicon-cloud-download"></i></a>
+                    <a id="${URLEncoder.encode(photo)}" href="#" onclick="addWeb('${URLEncoder.encode(photo)}')" class="btn btn-default btn-sm"><i class="icon ion-thumbsup"></i></a>
+                    <a href="#" class="btn btn-default btn-sm pull-right"><i class="icon ion-social-twitter"></i></a>
+                    <a href="#" class="btn btn-default btn-sm pull-right"><i class="icon ion-social-facebook"></i></a>
+                    <a href="#" class="btn btn-default btn-sm pull-right"><i class="icon ion-social-googleplus"></i></a>
+                </div>
             </div>
         #{/list}
     </div>

@@ -29,12 +29,8 @@ public class Tags extends Controller {
         Set<Photo> photos = null;
         if (tag != null && !tag.equals("")) {
             checkAuthenticity();
-            List<Tag> t = Tag.em().createQuery("SELECT t " +
-                    "FROM Tag t " + //SQL INJECTION HERE
-                    "WHERE t.id = ?)")
-                    .setParameter(1, Long.valueOf(tag))
-                    .getResultList();
-            photos = t.get(0).getPhotos();
+            Tag t = Tag.findById(Long.valueOf(tag));
+            photos = t == null ? null : t.getPhotos();
         }
         List<Tag> tags = Tag.findAll();
         render(tags, photos);

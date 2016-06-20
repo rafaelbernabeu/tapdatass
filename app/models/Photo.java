@@ -2,12 +2,14 @@ package models;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import play.db.jpa.Blob;
+import play.db.jpa.JPABase;
 import play.db.jpa.Model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import java.io.File;
 import java.util.Date;
 import java.util.Set;
 
@@ -105,7 +107,20 @@ public class Photo extends Model {
     }
 
     @Override
+    public <T extends JPABase> T save() {
+        super._save();
+        return (T) this;
+    }
+
+    @Override
     public String toString() {
         return ReflectionToStringBuilder.toString(this);
+    }
+
+    @Override
+    public <T extends JPABase> T delete() {
+        File f = new File("/opt/workspace/play1/tapdatass/date/attachments/"+this.getBlob().getUUID());
+        f.delete();
+        return super.delete();
     }
 }

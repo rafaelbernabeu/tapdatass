@@ -9,20 +9,23 @@ POST    /tags/search                            Tags.search
 POST    /tags/edit                              Tags.edit
 POST    /tags/delete                            Tags.delete
 POST    /photos/delete                          Photos.delete
-POST    /photos/addPhoto                        Photos.addPhoto
-POST    /photos/addFolder                       Photos.addFolder
+POST    /photos/addPhoto                        Photos.uploadPhoto
+POST    /photos/addFolder                       Photos.uploadFolder
+GET     /photos/uploadWeb                       Photos.uploadWeb
 
 GET     /                                       Application.index
 GET     /uploadFile                             Application.uploadFile
 GET     /uploadFolder                           Application.uploadFolder
-GET     /uploadWeb                              Application.uploadWeb
 GET     /gallery/{mode}                         Application.gallery
 GET     /tags/search                            Tags.search
 GET     /tags/list                              Tags.list
 GET     /tags/new                               Tags.newTag
 
-GET    /photos/addWin/{photoId}                 Photos.addWin
-GET    /photos/addLose/{photoId}                Photos.addLose
+GET    /photos/addWin                           Photos.addWin
+GET    /photos/addLose                          Photos.addLose
+GET    /photos/addWeb                           Photos.addWeb
+
+GET    /photos/uploadServer                     Photos.uploadServer
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
@@ -33,6 +36,7 @@ GET     /public/                                staticDir:public
 GET     /assets/                                staticDir:app/views/syrena/assets
 GET     /tags/assets/                           staticDir:app/views/syrena/assets
 GET     /gallery/assets/                        staticDir:app/views/syrena/assets
+GET     /photos/assets/                         staticDir:app/views/syrena/assets
 
 # Catch all
 #*       /{controller}/{action}                  {controller}.{action}
